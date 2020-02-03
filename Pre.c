@@ -8,7 +8,7 @@ int main(int argc, char *argv[]){
     }
     
     FILE *file;
-    file = fopen((argc -1), "r");
+    file = fopen((argv[argc-1]), "r"); 
     
     return 0;
 }
