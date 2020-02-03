@@ -3,5 +3,12 @@
 
 int main(int argc, char *argv[]){
 
+    if(argc == 0 || argc == 1){
+        return -1;
+    }
+    
+    FILE *file;
+    file = fopen((argc -1), "r");
+    
     return 0;
 }
