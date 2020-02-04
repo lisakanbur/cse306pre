@@ -1,6 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+/*Added define statements for each flag for later use and checks*/
+#define frh = false;
+#define maxField = false;
+#define minField = false;
+#define meanField = false;
+#define recordsFieldValue = false;
+
 int main(int argc, char *argv[]){
 
     if(argc == 0 || argc == 1){ // there are wrong number of arguments
