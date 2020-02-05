@@ -64,24 +64,18 @@ int main(int argc, char *argv[]){
     //parses file
 
     char* split = "";
-    int flag = FALSE;
   
     while (!feof(file)){
       fgets(singleLine, 1024, file); //gets one line
-      split = strtok(singleLine, ",");
+      split = strtok(singleLine, ","); //note MUST CHANGE THIS
       
       while (split!=NULL){ 
 	if (split[0] == '"'){
 	    puts("executed");
-	    flag = TRUE; //we found
-	    split = strtok(NULL, '"');
+	    split = strtok(NULL, "\"");
 	    printf("%s\n", split);
-	    flag = FALSE;
-
-	    continue;
 	  }
-	  
-	  if (flag == FALSE){
+	 else{
 	     printf("%s\n", split);
              split = strtok(NULL, ",");
 	   }
