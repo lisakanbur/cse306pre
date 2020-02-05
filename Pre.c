@@ -56,9 +56,17 @@ int main(int argc, char *argv[]){
     }
 
     //parses file
+
+    char* token = "";
+
     while (!feof(file)){
       fgets(singleLine, 1024, file); //gets one line
-      puts(singleLine);
+      token = strtok(singleLine, ",");
+      while (token!=NULL){
+          printf("%s\n", token);
+          token = strtok(NULL, ",");
+      }
+      //puts(singleLine);
     }
 
     fclose(file);
