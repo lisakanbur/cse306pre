@@ -4,11 +4,17 @@
 
 
 /*Added define statements for each flag for later use and checks*/
-#define frh = false;
-#define maxField = false;
-#define minField = false;
-#define meanField = false;
-#define recordsFieldValue = false;
+#define f false
+#define h false
+#define r false
+#define maxField false
+#define minField false
+#define meanField false
+#define recordsFieldValue false
+
+#define TRUE 1
+#define FALSE 0
+
 
 int argsCalled[7] = {}; //initializes to 0 which is false. if it's 1 its true
 //order of indices is: -f,-r,-h,-max,-min,-mean,-records
@@ -57,16 +63,30 @@ int main(int argc, char *argv[]){
 
     //parses file
 
-    char* token = "";
-
+    char* split = "";
+    int flag = FALSE;
+  
     while (!feof(file)){
       fgets(singleLine, 1024, file); //gets one line
-      token = strtok(singleLine, ",");
-      while (token!=NULL){
-          printf("%s\n", token);
-          token = strtok(NULL, ",");
-      }
-      //puts(singleLine);
+      split = strtok(singleLine, ",");
+      
+      while (split!=NULL){ 
+	if (split[0] == '"'){
+	    puts("executed");
+	    flag = TRUE; //we found
+	    split = strtok(NULL, '"');
+	    printf("%s\n", split);
+	    flag = FALSE;
+
+	    continue;
+	  }
+	  
+	  if (flag == FALSE){
+	     printf("%s\n", split);
+             split = strtok(NULL, ",");
+	   }
+        }
+      // puts(singleLine);
     }
 
     fclose(file);
