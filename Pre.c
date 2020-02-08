@@ -94,10 +94,10 @@ int main(int argc, char *argv[]){
  
       
       while (split != NULL || original != NULL){
-	puts("--start--");
-	puts(original);
+	//puts("--start--");
+	//puts(original);
 	puts(split);
-	puts("--end--");
+	//puts("--end--");
     
 	//if first one is comma in header does this work?
 	if (*original == '"'){ //then split it by "
