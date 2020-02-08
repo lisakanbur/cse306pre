@@ -76,24 +76,24 @@ int main(int argc, char *argv[]){
       
  
       char* split = "";
-      
-      //starts with something that has a comma
+ 
+      //starts with something that does not have a comma
       if (singleLine[0] == '"'){
 	split = strtok(singleLine, "\""); //do it twice?
-	
-        original = original + strlen(split)+2; //+1 is the comma
+
+        original = original + strlen(split)+2;
       }
       else{
 	split = strtok(singleLine, ",");
 	
-         original = original + strlen(split)+1; //+2 is the comma 
+         original = original + strlen(split)+1; 
       }
 
    //Header,"Header, header",header,header,header,header,header,header,header\n
 
  
-      
-      while (split != NULL || original != NULL){
+      /*
+      while (split != NULL && original != NULL){
 	//puts("--start--");
 	//puts(original);
 	puts(split);
@@ -108,6 +108,34 @@ int main(int argc, char *argv[]){
 	  split = strtok(NULL, ",");
 	  original = original + strlen(split) + 1;
         }
+
+	}*/
+
+
+            
+      while (split != NULL && original != NULL){
+	puts(split);
+
+   
+	if (*original == '"'){ 
+	  split = strtok(NULL, "\"");
+	  
+	  if (split == NULL){
+	    break;
+	  }
+		
+	  original = original + strlen(split) + 2;
+	}
+	else{
+	  split = strtok(NULL, ",");
+	  
+	  if (split == NULL){
+	    break;
+	   }
+	  
+	  original = original + strlen(split) + 1;
+        }
+
 
       }
       
