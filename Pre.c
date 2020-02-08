@@ -38,49 +38,79 @@ int main(int argc, char *argv[]){
     //tests the arguments provided ---> -h hello.csv would mean argc = 3
     while(start < argc-1){ //argc-1 because the last specified thing is the file
         if (strcmp(argv[start], "-f") == 0){ //0 means it matched
-            argsCalled[0] = 1; //1 means true
+            argsCalled[0] = TRUE; //1 means true
         }
         if (strcmp(argv[start], "-r") == 0){
-            argsCalled[1] = 1;
+            argsCalled[1] = TRUE;
         }
         if (strcmp(argv[start], "-h") == 0){
-            argsCalled[2] = 1;
+            argsCalled[2] = TRUE;
         }
         if (strcmp(argv[start], "-max") == 0){
-            argsCalled[3] = 1;
+            argsCalled[3] = TRUE;
         }
         if (strcmp(argv[start], "-min") == 0){
-            argsCalled[4] = 1;
+            argsCalled[4] = TRUE;
         }
         if (strcmp(argv[start], "-mean") == 0){
-            argsCalled[5] = 1;
+            argsCalled[5] = TRUE;
         }
         if (strcmp(argv[start], "-records") == 0){
-            argsCalled[6] = 1;
+            argsCalled[6] = TRUE;
         }
         start = start + 1;
     }
 
     //parses file
 
-    char* split = "";
-  
+
+     
     while (!feof(file)){
       fgets(singleLine, 1024, file); //gets one line
-      split = strtok(singleLine, ","); //note MUST CHANGE THIS
+
+      //no room past 1024
       
-      while (split!=NULL){ 
-	if (split[0] == '"'){
-	    puts("executed");
-	    split = strtok(NULL, "\"");
-	    printf("%s\n", split);
-	  }
-	 else{
-	     printf("%s\n", split);
-             split = strtok(NULL, ",");
-	   }
+      char *original = malloc(sizeof(char)*strlen(singleLine));
+      strcpy(original, singleLine);
+
+      
+ 
+      char* split = "";
+      
+      //starts with something that has a comma
+      if (singleLine[0] == '"'){
+	split = strtok(singleLine, "\""); //do it twice?
+	
+        original = original + strlen(split)+2; //+1 is the comma
+      }
+      else{
+	split = strtok(singleLine, ",");
+	
+         original = original + strlen(split)+1; //+2 is the comma 
+      }
+
+   //Header,"Header, header",header,header,header,header,header,header,header\n
+
+ 
+      
+      while (split != NULL || original != NULL){
+	puts("--start--");
+	puts(original);
+	puts(split);
+	puts("--end--");
+    
+	//if first one is comma in header does this work?
+	if (*original == '"'){ //then split it by "
+	  split = strtok(NULL, "\"");
+	  original = original + strlen(split) + 2;
+	}
+	else{
+	  split = strtok(NULL, ",");
+	  original = original + strlen(split) + 1;
         }
-      // puts(singleLine);
+
+      }
+      
     }
 
     fclose(file);
@@ -88,22 +118,3 @@ int main(int argc, char *argv[]){
     return 0;
 }
 
-/*
- * Display the number of records in the first field of file
- */
-
-//temporarily commented out because errors
-
-/*
-char[] field_count(FILE *file){
-  //use fgets() or gets() to read line from csv
-  //attempting fgets()
-  
-  char str_buf[1024];
-  fgets(str_buf, 1024, *file);
-  //if you print str_buf then it should be the first record in the file
-  return char[];
-  
-}
-
-*/
