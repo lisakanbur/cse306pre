@@ -4,13 +4,7 @@
 
 
 /*Added define statements for each flag for later use and checks*/
-#define f false
-#define h false
-#define r false
-#define maxField false
-#define minField false
-#define meanField false
-#define recordsFieldValue false
+
 #define MAX 1024
 
 #define TRUE 1
@@ -25,9 +19,26 @@ int argsCalled[7] = {}; //initializes to 0 which is false. if it's 1 its true
 char* lineParser(FILE *file, int argc, char* argv[]){
     //parses file
 
-    char* output = "";
+    char* output = ""; //this will be the string that at the end concatenates
+                       //all of the args etered
+    
     char singleLine[1024];
 
+
+    
+    /* THIS IS WHAT YOU WILL BE MODIFYING */
+
+    char *f = ""; //string for -f value
+    char *r = ""; //string for -r value
+    char *max_field = ""; //string for max field
+    char *min_field = ""; //string for min field
+    char *mean_field = ""; //string for mean field
+    char *records = ""; //string for records field value
+
+    /* THIS IS WHAT YOU WILL BE MODIFYING */
+
+
+    
     while (!feof(file)){
       fgets(singleLine, 1024, file); //gets one line
       
@@ -103,14 +114,14 @@ char* lineParser(FILE *file, int argc, char* argv[]){
       //now we loop through argv to get the order of the commands
 
       for (int i = 1; i < argc; i++){
+	if (strcmp(argv[i], "-h") == 0){
+	   continue;
+        }
 	if (strcmp(argv[i], "-f") == 0){ //0 means it matched
             
         }
         if (strcmp(argv[i], "-r") == 0){
             
-        }
-        if (strcmp(argv[i], "-h") == 0){
-	   continue;
         }
         if (strcmp(argv[i], "-max") == 0){
             
@@ -124,12 +135,10 @@ char* lineParser(FILE *file, int argc, char* argv[]){
         if (strcmp(argv[i], "-records") == 0){
            
         }
-    }
+      } //end for loop
 	
-      }//end for loop
-      
     }
-
+      
     return output;
 }
 
