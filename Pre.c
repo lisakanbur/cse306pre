@@ -11,6 +11,7 @@
 #define minField false
 #define meanField false
 #define recordsFieldValue false
+#define MAX 1024
 
 #define TRUE 1
 #define FALSE 0
@@ -18,6 +19,10 @@
 
 int argsCalled[7] = {}; //initializes to 0 which is false. if it's 1 its true
 //order of indices is: -f,-r,-h,-max,-min,-mean,-records
+
+char* lines[MAX][MAX] = {};
+
+int lineIdx = 0;
 
 int main(int argc, char *argv[]){
 
@@ -64,7 +69,6 @@ int main(int argc, char *argv[]){
     //parses file
 
 
-     
     while (!feof(file)){
       fgets(singleLine, 1024, file); //gets one line
 
@@ -73,61 +77,63 @@ int main(int argc, char *argv[]){
       char *original = malloc(sizeof(char)*strlen(singleLine));
       strcpy(original, singleLine);
 
-      
+      char innerArray[MAX][MAX] = {};
  
       char* split = "";
- 
+
+      //puts(singleLine);
+
+      int idx = 0;
+     
       //starts with something that does not have a comma
       if (singleLine[0] == '"'){
 	split = strtok(singleLine, "\""); //do it twice?
 
         original = original + strlen(split)+2;
       }
+      
+      else if (singleLine[0] == ','){ //skip comma
+	split = "empty",
+	original = original + 1;
+      }
+      
       else{
 	split = strtok(singleLine, ",");
 	
          original = original + strlen(split)+1; 
       }
 
+      strcpy(innerArray[idx], split); //adds first value of line to array
+      
+      
+
    //Header,"Header, header",header,header,header,header,header,header,header\n
 
- 
-      /*
-      while (split != NULL && original != NULL){
-	//puts("--start--");
-	//puts(original);
-	puts(split);
-	//puts("--end--");
-    
-	//if first one is comma in header does this work?
-	if (*original == '"'){ //then split it by "
-	  split = strtok(NULL, "\"");
-	  original = original + strlen(split) + 2;
-	}
-	else{
-	  split = strtok(NULL, ",");
-	  original = original + strlen(split) + 1;
-        }
-
-	}*/
-
-
+      //test,"test,test","test,test"
             
       while (split != NULL && original != NULL){
 	puts(split);
 
+	idx += 1;
    
-	if (*original == '"'){ 
-	  split = strtok(NULL, "\"");
-	  
+	if (*original == '"'){
+
+	  split = strtok(original, "\"");
+
 	  if (split == NULL){
 	    break;
 	  }
 		
-	  original = original + strlen(split) + 2;
+	  original = original + strlen(split) + 3;
+
 	}
+	else if (*original == ','){ //skip the comma
+	  split = ""; //empty case
+	  original = original + 1;
+	}
+	
 	else{
-	  split = strtok(NULL, ",");
+	  split = strtok(original, ",");
 	  
 	  if (split == NULL){
 	    break;
@@ -135,10 +141,15 @@ int main(int argc, char *argv[]){
 	  
 	  original = original + strlen(split) + 1;
         }
-
+	
+	strcpy(innerArray[idx], split); //adds value of line to inner array
 
       }
-      
+      //at end, add the inner array to the original
+
+      //  memcpy(lines[lineIdx], innerArray, sizeof(innerArray));
+      // lines[lineIdx] = innerArray;
+      // lineIdx +=1;
     }
 
     fclose(file);
