@@ -34,6 +34,9 @@ char* lineParser(FILE *file, int argc, char* argv[]){
   char min_field[MAX] = "2147483647"; //string for min field
   char *mean_field = ""; //string for mean field
   char *records = ""; //string for records field value
+  char sum[MAX] = "0"; //Start the sum at zero and go up from there
+  char count[MAX]= "0"; // counter used to for calcuating mean
+  int decimal, sign;
 
   /* THIS IS WHAT YOU WILL BE MODIFYING */
 
@@ -150,7 +153,12 @@ char* lineParser(FILE *file, int argc, char* argv[]){
             
       }
       if (strcmp(argv[i], "-mean") == 0){
-           
+          char* input = argv[i + 1];
+          int inputIdx = atoi(input);
+          int added = atof(sum) + atof(innerArray[inputIdx]);//to get the added sums together (could probably do in one line)
+          strcpy(sum, ecvt(added, MAX, &decimal, &sign));//ecvt takes in a double and returns a string
+          strcpy(count, ecvt((atof(count)+ 1), MAX, &decimal, &sign));
+          
       }
       if (strcmp(argv[i], "-records") == 0){
            
@@ -158,6 +166,11 @@ char* lineParser(FILE *file, int argc, char* argv[]){
     } //end for loop
 	
   } //end while loop i think
+
+  double placeholderMean = atof(sum) / atof(count);
+  strcpy(mean_field, ecvt(placeholderMean, MAX, &decimal, &sign));
+  /*the mean is causing a segmentation fault with a core dump, I need to look into yhr value, I have tried a separate mean variable
+    I do not beleive that I am reading the input value correctly*/
 
   
   //now we need to loop thru argv again and merge to output
