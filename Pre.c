@@ -81,6 +81,8 @@ char* lineParser(FILE *file, int argc, char* argv[]){
   char min_field[MAX] = "2147483647"; //string for min field
   char mean_field[MAX] = "0"; //string for mean field
   float count = 0;
+
+  int countForR = 0;
   char *records = ""; //string for records field value
 
   char headerLine[MAX][MAX] = {}; //stores header line
@@ -208,7 +210,7 @@ char* lineParser(FILE *file, int argc, char* argv[]){
             
       }
       if (strcmp(argv[i], "-r") == 0){
-            
+	countForR+=1; //increments count bc new line seen
       }
       if (strcmp(argv[i], "-max") == 0){ //FIX LATER - doesn't account for "ref_date"
 	//display the max value in the field
@@ -324,7 +326,12 @@ char* lineParser(FILE *file, int argc, char* argv[]){
       strncat(output, &newLine, 1); //adds new line character
     }
     if (strcmp(argv[i], "-r") == 0){
-      //add the r value to output          
+      //add the r value to output
+      char temp[sizeof(int)];
+      
+      sprintf(temp, "%i", countForR-1); //added -1 bc i think its added a new line at end
+      strcat(output, temp);
+      strncat(output, &newLine, 1);
     }
     if (strcmp(argv[i], "-max") == 0){
       //add the max value to output
@@ -407,7 +414,7 @@ int main(int argc, char *argv[]){
   if (strcmp(out, "error") == 0){ //error occurred
     return 1;
   }
-  out[strlen(out)-1] = '\0';
+  out[strlen(out)-1] = '\0'; //fixes extra new line at end - deletes it
   
   puts(out);
 
