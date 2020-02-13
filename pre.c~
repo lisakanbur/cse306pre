@@ -262,7 +262,7 @@ char* lineParser(FILE *file, int argc, char* argv[]){
 
 	//need to test if the field given was 0 or "Ref_Date"
 
-	int fieldIDX = findHeaderFieldIdx(headerLine, field, headerLength); //will translate to index
+	int fieldIDX = findHeaderFieldIdx(headerLine, field, headerLength); //will translate to inde
 	
 	if (fieldIDX == -1){ //there is an error and we must abort
 	  strcpy(output, "error"); //exit because string value - cant take max
@@ -355,11 +355,6 @@ char* lineParser(FILE *file, int argc, char* argv[]){
     }
     if (strcmp(argv[i], "-records") == 0){
       //add the records value to output
-      char *field = argv[i+1]; //this is the field in which the value needs to match
-      char *value = argv[i+2]; //this is the value that we are checking for
-      
-      
-      
     }
   } //end for loop
 
