@@ -85,8 +85,9 @@ char* lineParser(FILE *file, int argc, char* argv[]){
 
   char headerLine[MAX][MAX] = {}; //stores header line
   int headerLength = 0; //calculates length of header
-  
 
+  char buffFieldLength[sizeof(int)];
+  
   int h = FALSE; // other flag to see if -h has been used
 
   /* THIS IS WHAT YOU WILL BE MODIFYING */
@@ -201,6 +202,9 @@ char* lineParser(FILE *file, int argc, char* argv[]){
 	continue;
       }
       if (strcmp(argv[i], "-f") == 0){ //0 means it matched
+	//just value of headerLength
+	
+	sprintf(buffFieldLength, "%i", headerLength);
             
       }
       if (strcmp(argv[i], "-r") == 0){
@@ -307,13 +311,17 @@ char* lineParser(FILE *file, int argc, char* argv[]){
   
     //now we need to loop thru argv again and merge to output
 
+  char newLine = '\n';
     
   for (int i = 1; i < argc; i++){
     if (strcmp(argv[i], "-h") == 0){
       continue;
     }
     if (strcmp(argv[i], "-f") == 0){ //0 means it matched
-      //add the f value to output         
+      //add the f value to output
+      
+      strcat(output, buffFieldLength);
+      strncat(output, &newLine, 1); //adds new line character
     }
     if (strcmp(argv[i], "-r") == 0){
       //add the r value to output          
@@ -321,10 +329,12 @@ char* lineParser(FILE *file, int argc, char* argv[]){
     if (strcmp(argv[i], "-max") == 0){
       //add the max value to output
       strcat(output, max_field);
+      strncat(output, &newLine, 1); //adds new line character
     }
     if (strcmp(argv[i], "-min") == 0){
       //add the min value to output
       strcat(output, min_field);
+      strncat(output, &newLine, 1); //adds new line character
     }
     if (strcmp(argv[i], "-mean") == 0){
       //add the mean value to output
@@ -335,15 +345,15 @@ char* lineParser(FILE *file, int argc, char* argv[]){
       sprintf(temp, "%f", finalMean);
 
       strcat(output, temp);
- 
+      strncat(output, &newLine, 1); //adds new line character
     }
     if (strcmp(argv[i], "-records") == 0){
       //add the records value to output
     }
   } //end for loop
 
-    //strcpy(output, max_field);
 
+  //keep in mind: extra newline is added to end
  
   return output;
 }
