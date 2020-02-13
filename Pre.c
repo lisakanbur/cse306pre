@@ -70,19 +70,16 @@ char* lineParser(FILE *file, int argc, char* argv[]){
   //all of the args etered
     
   char singleLine[MAX];
-
-
     
   /* THIS IS WHAT YOU WILL BE MODIFYING */
 
   char *f = ""; //string for -f value
-  char *r = ""; //string for -r value
   char max_field[MAX] = "-1"; //int for max field
   char min_field[MAX] = "2147483647"; //string for min field
   char mean_field[MAX] = "0"; //string for mean field
   float count = 0;
 
-  int countForR = 0;
+  int countForR = 0; //for -r field
   char *records = ""; //string for records field value
 
   char headerLine[MAX][MAX] = {}; //stores header line
@@ -414,6 +411,8 @@ int main(int argc, char *argv[]){
   char* out = lineParser(file, argc, argv);
 
   if (strcmp(out, "error") == 0){ //error occurred
+    puts("Error occurred.  Please ensure the file has numeric values if using min/number-based arguments (or that you've removed the header).");
+    
     return 1;
   }
   out[strlen(out)-1] = '\0'; //fixes extra new line at end - deletes it
