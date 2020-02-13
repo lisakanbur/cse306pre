@@ -407,6 +407,8 @@ int main(int argc, char *argv[]){
   if (strcmp(out, "error") == 0){ //error occurred
     return 1;
   }
+  out[strlen(out)-1] = '\0';
+  
   puts(out);
 
   fclose(file);
