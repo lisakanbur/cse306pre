@@ -104,7 +104,9 @@ char* lineParser(FILE *file, int argc, char* argv[]){
     if((temp=strchr(singleLine, '\n')) != NULL){
       *temp = '\0';
     }
-      
+
+    puts(singleLine);
+    
     char *original = malloc(sizeof(char)*strlen(singleLine));
     strcpy(original, singleLine);
 
@@ -329,7 +331,7 @@ char* lineParser(FILE *file, int argc, char* argv[]){
       //add the r value to output
       char temp[sizeof(int)];
       
-      sprintf(temp, "%i", countForR-1); //added -1 bc i think its added a new line at end
+      sprintf(temp, "%i", countForR); //added -1 bc i think its added a new line at end
       strcat(output, temp);
       strncat(output, &newLine, 1);
     }
