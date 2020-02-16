@@ -80,7 +80,7 @@ char* lineParser(FILE *file, int argc, char* argv[]){
   float count = 0;
 
   int countForR = 0; //for -r field
-  char *records = ""; //string for records field value
+  char records[MAX] = "0"; //string for records field value
 
   char headerLine[MAX][MAX] = {}; //stores header line
   int headerLength = 0; //calculates length of header
@@ -303,7 +303,25 @@ char* lineParser(FILE *file, int argc, char* argv[]){
            
       }
       if (strcmp(argv[i], "-records") == 0){
-           
+	if (!h){
+	  strcpy(output, "error");
+	  return output;
+	}
+	char *field = argv[i+1]; //this is the field in which the value needs to match
+        char *value = argv[i+2]; //this is the value that we are checking for
+	int fieldIDX = findHeaderFieldIdx(headerLine, field, headerLength);
+
+	if (fieldIDX == -1){
+	  strcpy(output, "error");
+	  return output;
+	}
+	puts(innerArray[fieldIDX]);
+	puts(value);
+	if (strcmp(innerArray[fieldIDX],value) == 0){
+	  /* puts(innerArray[0]); */
+	  /* puts("LOOP REACHED"); */
+	  strcpy(records, innerArray[fieldIDX]);
+	}
       }
     } //end for loop
 	
@@ -355,11 +373,8 @@ char* lineParser(FILE *file, int argc, char* argv[]){
     }
     if (strcmp(argv[i], "-records") == 0){
       //add the records value to output
-      char *field = argv[i+1]; //this is the field in which the value needs to match
-      char *value = argv[i+2]; //this is the value that we are checking for
-      
-      
-      
+      strcat(output, records);
+      strncat(output, &newLine, 1);
     }
   } //end for loop
 
