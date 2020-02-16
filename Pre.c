@@ -246,6 +246,7 @@ char* lineParser(FILE *file, int argc, char* argv[]){
 	  }
 	*/
 	
+        puts(innerArray[fieldIDX]);
 	
 	if (atof(innerArray[fieldIDX]) > atof(max_field)){
 	  strcpy(max_field, innerArray[fieldIDX]); //copies max into max_field
