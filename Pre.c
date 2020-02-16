@@ -80,7 +80,7 @@ char* lineParser(FILE *file, int argc, char* argv[]){
   float count = 0;
 
   int countForR = 0; //for -r field
-  char records[MAX] = "0"; //string for records field value
+  char records[100000] = ""; //string for records field value
 
   char headerLine[MAX][MAX] = {}; //stores header line
   int headerLength = 0; //calculates length of header
@@ -102,10 +102,13 @@ char* lineParser(FILE *file, int argc, char* argv[]){
       *temp = '\0';
     }
 
-    puts(singleLine);
+ 
     
     char *original = malloc(sizeof(char)*strlen(singleLine));
     strcpy(original, singleLine);
+
+    char *lineHolder = malloc(sizeof(char)*strlen(singleLine));
+    strcpy(lineHolder, singleLine); //do not modify lineHolder
 
     char innerArray[MAX][MAX] = {};
  
@@ -307,6 +310,7 @@ char* lineParser(FILE *file, int argc, char* argv[]){
 	  strcpy(output, "error");
 	  return output;
 	}
+	
 	char *field = argv[i+1]; //this is the field in which the value needs to match
         char *value = argv[i+2]; //this is the value that we are checking for
 	int fieldIDX = findHeaderFieldIdx(headerLine, field, headerLength);
@@ -315,12 +319,13 @@ char* lineParser(FILE *file, int argc, char* argv[]){
 	  strcpy(output, "error");
 	  return output;
 	}
-	puts(innerArray[fieldIDX]);
-	puts(value);
-	if (strcmp(innerArray[fieldIDX],value) == 0){
-	  /* puts(innerArray[0]); */
-	  /* puts("LOOP REACHED"); */
-	  strcpy(records, innerArray[fieldIDX]);
+
+
+	
+	if (strncmp(innerArray[fieldIDX],value,strlen(value)) == 0){
+	  char newLine = '\n';
+	  strcat(records, lineHolder); //want to copy whole line not just fieldIDx
+	  strncat(records, &newLine, 1); //adds new line character
 	}
       }
     } //end for loop
@@ -373,6 +378,9 @@ char* lineParser(FILE *file, int argc, char* argv[]){
     }
     if (strcmp(argv[i], "-records") == 0){
       //add the records value to output
+
+      records[strlen(records)-1] = '\0';
+       
       strcat(output, records);
       strncat(output, &newLine, 1);
     }
