@@ -273,6 +273,8 @@ char* lineParser(FILE *file, int argc, char* argv[]){
 	  return output;
 	}
 
+	puts(innerArray[fieldIDX]);
+
 	if (atof(innerArray[fieldIDX]) < atof(min_field)){
 	  strcpy(min_field, innerArray[fieldIDX]);
 	}
