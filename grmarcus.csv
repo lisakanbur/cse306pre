@@ -1,0 +1,12 @@
+DATE,UBIT,DURATION,ACTIVITY & TOOL DESCRIPTION
+2/3/20,grmarcus,1 hour,"made a main function, set up github, and opened the csv file"
+2/4/20,grmarcus,2 hours,Figured out how to open a file and read the lines.  Also went through the arguments provided and flagged true if it was listed.
+2/5/20,grmarcus,3 hours,"Played around with strtok and splitting a string.  Spent a lot of time trying to figure out how to split the string using , and "" depending on if a field has a comma in it. Taking a break now because progress is minimal"
+8-Feb,grmarcus,2 hours,Fixed syntax error. Stil having issues with splitting the line
+2/9/20,grmarcus,1.5 hours,figured out how to split the line I believe
+2/10/20,grmarcus,3.5 hours,implemented max and min and added helper function
+2/12/20,grmarcus,4 hours,"Attempted working with mean function and allowing user to input ""Ref_Date"" as well as 0 for fields.  Running into a problem with ""Value"" being split as ""Value "" but the last character is not a new line"
+2/13/20,grmarcus,2 hours,"I think had a successful fix to mean function. Was able to also allow user to input ""Ref_Date"" and ""Value"" (managed to fix issue).  Still have issue with ""check if integer"" function. Also added -r and -f (previously added -min, -max, and -mean)"
+2/15/20,grmarcus,1 hour,Attempted to fix integer test function
+2/16/20,grmarcus,4 hours,"Basically fixed -records and still attempting to look at check for integer problem. Noticed issue where ""2004"" is being considered its own line only for this .csv file which adds an extra line. Also some corruption with splits?"
+16-Feb,grmarcus,1 hour,Tried to look into why min results in a ?.0 value on timberlake but not on mac os - unsure
