@@ -1,0 +1,7 @@
+DATE,UBIT,DURATION,ACTIVITY & TOOL DESCRIPTION
+2/3/2020,abhijitt,60 mins.,met with group and helped create main function
+2/4/2020,abhijitt,120 mins.,helped create global variables and research ways to parse command line arguments
+2/5/2020,abhijitt,120 mins.,researched ways to parse columns in CSV file to implement -r
+2/7/20,abhijitt,60 mins.,implemented -r functionality
+2/11/20,abhijitt,60 mins.,researched way to help fix records function
+2/12/20,abhijitt,180 mins.,"fixed bugs in -r, helped create -records functionality"
