@@ -1,0 +1,10 @@
+DATE,UBIT,DURATION,ACTVITY & TOOL DESCRIPTION
+2/3/20,lisakanb,1 hr,Set up github repo and basic main() functionality
+2/3/20,lisakanb,30 mins,Added helper function and attemped file read functionality
+2/5/20,lisakanb,1 hr,Worked on implementing file parsing functionality
+2/6/20,lisakanb,1 hr 30 mins,Fixed some issues with file parsing
+2/10/20,lisakanb,2 hrs,Implemented commands
+2/12/20,lisakanb,1 hr,"records command, general debugging"
+2/15/20,lisakanb,2 hrs,records command bug and tried to fix extra 2004 issue
+2/16/20,lisakanb,3 hrs,records command and tried to fix 2004 issue
+2/16/20,lisakanb,1 hr,Tried to fix/messsed around with -min
