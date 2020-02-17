@@ -246,7 +246,7 @@ char* lineParser(FILE *file, int argc, char* argv[]){
 	  }
 	*/
 	
-        puts(innerArray[fieldIDX]);
+	// puts(innerArray[fieldIDX]);
 	
 	if (atof(innerArray[fieldIDX]) > atof(max_field)){
 	  strcpy(max_field, innerArray[fieldIDX]); //copies max into max_field
@@ -267,13 +267,13 @@ char* lineParser(FILE *file, int argc, char* argv[]){
 	//need to test if the field given was 0 or "Ref_Date"
 
 	int fieldIDX = findHeaderFieldIdx(headerLine, field, headerLength); //will translate to index
-	puts(innerArray[fieldIDX]);
+	//	puts(innerArray[fieldIDX]);
 	if (fieldIDX == -1){ //there is an error and we must abort
 	  strcpy(output, "error"); //exit because string value - cant take max
 	  return output;
 	}
 
-	puts(innerArray[fieldIDX]);
+	//	puts(innerArray[fieldIDX]);
 
 	if (atof(innerArray[fieldIDX]) < atof(min_field)){
 	  strcpy(min_field, innerArray[fieldIDX]);
