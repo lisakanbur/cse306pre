@@ -267,7 +267,7 @@ char* lineParser(FILE *file, int argc, char* argv[]){
 	//need to test if the field given was 0 or "Ref_Date"
 
 	int fieldIDX = findHeaderFieldIdx(headerLine, field, headerLength); //will translate to index
-	
+	puts(innerArray[fieldIDX]);
 	if (fieldIDX == -1){ //there is an error and we must abort
 	  strcpy(output, "error"); //exit because string value - cant take max
 	  return output;
